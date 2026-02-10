@@ -98,19 +98,19 @@ export function SummaryCards({ summary }: SummaryCardsProps) {
 
           <div className="relative">
             <div
-              className="flex h-8 w-8 items-center justify-center rounded-lg"
+              className="flex h-12 w-12 items-center justify-center rounded-lg"
               style={{ backgroundColor: `${stat.color}12` }}
             >
-              <stat.icon className="h-3.5 w-3.5" style={{ color: stat.color }} />
+              <stat.icon className="h-6 w-6" style={{ color: stat.color }} />
             </div>
 
             <div className="mt-3">
-              <p className="font-serif text-2xl font-normal italic tabular-nums text-foreground">
+              <p className="font-serif text-3xl font-normal italic tabular-nums text-foreground">
                 <AnimatedValue value={stat.value} decimals={stat.decimals} />
               </p>
               <div className="mt-0.5 flex items-center gap-1.5">
-                <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{stat.label}</span>
-                <span className="text-[9px] text-muted-foreground/40 font-mono">{stat.unit}</span>
+                <span className="text-xs uppercase tracking-wider text-muted-foreground">{stat.label}</span>
+                <span className="text-[11px] text-muted-foreground/40 font-mono">{stat.unit}</span>
               </div>
             </div>
           </div>

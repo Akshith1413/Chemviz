@@ -34,14 +34,14 @@ const tooltipStyle = {
   backgroundColor: "hsl(0 0% 8%)",
   border: "1px solid hsl(0 0% 16%)",
   borderRadius: "12px",
-  fontSize: "11px",
+  fontSize: "13px",
   color: "hsl(42 30% 90%)",
   boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
-  padding: "8px 12px",
+  padding: "10px 14px",
 }
 
 const axisStyle = {
-  fontSize: 10,
+  fontSize: 12,
   fill: "hsl(42 10% 45%)",
   fontFamily: "var(--font-space-grotesk)",
 }
@@ -96,8 +96,8 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
       >
         <div className="flex items-center justify-between border-b border-border/30 px-5 py-4">
           <div>
-            <h3 className="font-serif text-base italic text-foreground">Parameter Comparison</h3>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">All equipment readings</p>
+            <h3 className="font-serif text-lg italic text-foreground">Parameter Comparison</h3>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">All equipment readings</p>
           </div>
           <div className="hidden sm:flex items-center gap-3">
             {[
@@ -107,7 +107,7 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full" style={{ backgroundColor: item.color }} />
-                <span className="text-[10px] text-muted-foreground">{item.label}</span>
+                <span className="text-xs text-muted-foreground">{item.label}</span>
               </div>
             ))}
           </div>
@@ -127,7 +127,11 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
                   tickLine={false}
                 />
                 <YAxis tick={axisStyle} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "hsl(36 100% 50% / 0.03)" }} />
+                <Tooltip
+                  contentStyle={tooltipStyle}
+                  itemStyle={{ color: "hsl(42 30% 90%)" }}
+                  cursor={{ fill: "hsl(36 100% 50% / 0.03)" }}
+                />
                 <Bar dataKey="Flowrate" fill={COLORS[0]} radius={[6, 6, 0, 0]} maxBarSize={20} />
                 <Bar dataKey="Pressure" fill={COLORS[1]} radius={[6, 6, 0, 0]} maxBarSize={20} />
                 <Bar dataKey="Temperature" fill={COLORS[2]} radius={[6, 6, 0, 0]} maxBarSize={20} />
@@ -146,8 +150,8 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
           className={cardClass}
         >
           <div className="border-b border-border/30 px-5 py-4">
-            <h3 className="font-serif text-base italic text-foreground">Type Distribution</h3>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">Equipment categories</p>
+            <h3 className="font-serif text-lg italic text-foreground">Type Distribution</h3>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">Equipment categories</p>
           </div>
           <div className="p-5">
             <div className="h-[220px]">
@@ -174,7 +178,7 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
                           fill="hsl(42 20% 70%)"
                           textAnchor={x > (cx as number) ? "start" : "end"}
                           dominantBaseline="central"
-                          fontSize={10}
+                          fontSize={12}
                           fontWeight={500}
                         >
                           {`${name} ${Math.round((value / total) * 100)}%`}
@@ -187,7 +191,10 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip contentStyle={tooltipStyle} />
+                  <Tooltip
+                    contentStyle={tooltipStyle}
+                    itemStyle={{ color: "hsl(42 30% 90%)" }}
+                  />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -198,8 +205,8 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
                   className="inline-flex items-center gap-1.5 rounded-full border border-border/30 bg-muted/30 px-2.5 py-1"
                 >
                   <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
-                  <span className="text-[10px] text-muted-foreground">{entry.name}</span>
-                  <span className="text-[10px] font-semibold text-foreground">{entry.value}</span>
+                  <span className="text-xs text-muted-foreground">{entry.name}</span>
+                  <span className="text-xs font-semibold text-foreground">{entry.value}</span>
                 </span>
               ))}
             </div>
@@ -214,19 +221,22 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
           className={cardClass}
         >
           <div className="border-b border-border/30 px-5 py-4">
-            <h3 className="font-serif text-base italic text-foreground">Type Radar Profile</h3>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">Avg values by equipment type</p>
+            <h3 className="font-serif text-lg italic text-foreground">Type Radar Profile</h3>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">Avg values by equipment type</p>
           </div>
           <div className="p-5">
             <div className="h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="70%">
                   <PolarGrid stroke="hsl(0 0% 16%)" />
-                  <PolarAngleAxis dataKey="type" tick={{ fontSize: 10, fill: "hsl(42 10% 50%)" }} />
+                  <PolarAngleAxis dataKey="type" tick={{ fontSize: 12, fill: "hsl(42 10% 50%)" }} />
                   <Radar name="Flowrate" dataKey="Flowrate" stroke={COLORS[0]} fill={COLORS[0]} fillOpacity={0.15} strokeWidth={2} />
                   <Radar name="Pressure" dataKey="Pressure" stroke={COLORS[1]} fill={COLORS[1]} fillOpacity={0.1} strokeWidth={2} />
                   <Radar name="Temp" dataKey="Temperature" stroke={COLORS[2]} fill={COLORS[2]} fillOpacity={0.1} strokeWidth={2} />
-                  <Tooltip contentStyle={tooltipStyle} />
+                  <Tooltip
+                    contentStyle={tooltipStyle}
+                    itemStyle={{ color: "hsl(42 30% 90%)" }}
+                  />
                 </RadarChart>
               </ResponsiveContainer>
             </div>
@@ -238,7 +248,7 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-1.5">
                   <span className="h-0.5 w-4 rounded-full" style={{ backgroundColor: item.color }} />
-                  <span className="text-[10px] text-muted-foreground">{item.label}</span>
+                  <span className="text-xs text-muted-foreground">{item.label}</span>
                 </div>
               ))}
             </div>
@@ -254,8 +264,8 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
         className={cardClass}
       >
         <div className="border-b border-border/30 px-5 py-4">
-          <h3 className="font-serif text-base italic text-foreground">Parameter Trends</h3>
-          <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">Sequential values across all entries</p>
+          <h3 className="font-serif text-lg italic text-foreground">Parameter Trends</h3>
+          <p className="mt-0.5 text-xs uppercase tracking-wider text-muted-foreground">Sequential values across all entries</p>
         </div>
         <div className="p-5">
           <div className="h-[260px]">
@@ -278,7 +288,10 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
                 <CartesianGrid strokeDasharray="2 4" stroke="hsl(0 0% 14%)" vertical={false} />
                 <XAxis dataKey="name" tick={axisStyle} angle={-45} textAnchor="end" height={60} axisLine={{ stroke: "hsl(0 0% 14%)" }} tickLine={false} />
                 <YAxis tick={axisStyle} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={tooltipStyle} />
+                <Tooltip
+                  contentStyle={tooltipStyle}
+                  itemStyle={{ color: "hsl(42 30% 90%)" }}
+                />
                 <Area type="monotone" dataKey="Flowrate" stroke={COLORS[0]} strokeWidth={2} fill="url(#gF)" dot={{ r: 2.5, fill: COLORS[0], strokeWidth: 0 }} activeDot={{ r: 4, strokeWidth: 2, stroke: "hsl(0 0% 8%)" }} />
                 <Area type="monotone" dataKey="Pressure" stroke={COLORS[1]} strokeWidth={1.5} fill="url(#gP)" dot={{ r: 2, fill: COLORS[1], strokeWidth: 0 }} activeDot={{ r: 4, strokeWidth: 2, stroke: "hsl(0 0% 8%)" }} />
                 <Area type="monotone" dataKey="Temperature" stroke={COLORS[2]} strokeWidth={1.5} fill="url(#gT)" dot={{ r: 2, fill: COLORS[2], strokeWidth: 0 }} activeDot={{ r: 4, strokeWidth: 2, stroke: "hsl(0 0% 8%)" }} />
@@ -293,7 +306,7 @@ export function EquipmentCharts({ summary }: EquipmentChartsProps) {
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-1.5">
                 <span className="h-0.5 w-4 rounded-full" style={{ backgroundColor: item.color }} />
-                <span className="text-[10px] text-muted-foreground">{item.label}</span>
+                <span className="text-xs text-muted-foreground">{item.label}</span>
               </div>
             ))}
           </div>
